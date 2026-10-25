@@ -43,7 +43,7 @@ export class Monster extends GameOpject {
 
     this.facingDirection = DOWN;
     this.destinationPosition = this.position.duplicate();
-    this.speed = 0.5;            
+    this.speed = 0.3;            
     this.chaseRange = 16 * 8;    
     this.heroPosition = null;
     this.hitCooldown = 0;
@@ -75,7 +75,7 @@ export class Monster extends GameOpject {
     const dy = this.heroPosition.y - this.position.y;
     const dist = Math.hypot(dx, dy);
 
-    if (dist > this.chaseRange || dist < 8) {
+    if (dist > this.chaseRange || dist < 30) {
       this.playStand();
       return;
     }

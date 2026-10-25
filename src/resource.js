@@ -8,6 +8,7 @@ class Resources {
           monster :"/sprites/slime-zombie.png",
           shadow: "/sprites/shadow.png",
           rod:"/sprites/rod.png",
+          heart: "/sprites/heart.png",
           flower:"/sprites/flower.png",
           underground_1:"/sprites/underground_1.png",
           underground_2:"/sprites/underground_2.png"

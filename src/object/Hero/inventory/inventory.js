@@ -11,8 +11,8 @@ export class Inventory extends GameOpject{
         });
        this.nextId = 0;
         this.items = [
-            { id :-1 , image :resources.images.rod},
-            { id :-2 , image :resources.images.rod},
+            { id :-1 , image :resources.images.heart},
+            { id :-2 , image :resources.images.heart},
         ]
 
      events.on("HERO_PICKS_UP_ITEM",this , data =>{
@@ -36,7 +36,7 @@ this.children.forEach(child => child.destroy())
 this.items.forEach((item, index)=> {
   const sprite =new Sprite({
         resource : item.image,
-        position: new Vector2 (index * 12 ,0 )
+        position: new Vector2 (index *13 ,0 )
         })
         this.addChild(sprite);
  })
