@@ -7,37 +7,60 @@ import { GameOpject } from "../gameObject";
 export class Inventory extends GameOpject{
     constructor(){
         super({
-            position:new Vector2(3,8)
+            position:new Vector2(0,0)
         });
-       this.nextId = 0;
-        this.items = [
-            { id :-1 , image :resources.images.heart},
-            { id :-2 , image :resources.images.heart},
-        ]
+       
+    this.nextId = 0;
+    this.items = [];
+    this.itemSprites = [];
 
+    this.lifeFrames = 9;
+    this.lifeFrame = 0;
+    this.lifeSprite = new Sprite({
+      resource: resources.images.life,
+      frameSize: new Vector2(64, 19),   
+      hFrames: 1,
+      vFrames: this.lifeFrames,
+      frame: 0,
+      position: new Vector2(0, 0),
+    });
+    this.addChild(this.lifeSprite);
+
+      events.on("CHANGE_LIFE", this, data => {
+      this.setLifeFrame(this.lifeFrame + data.amount);
+    });
      events.on("HERO_PICKS_UP_ITEM",this , data =>{
-          console.log("pickup data:",  data.image.image.src);
       this.nextId +=1;  
       this.items.push({ 
       id : this.nextId,
       image : data.image
 
-      })
+      });
       this.renderInventory();
-        })
-
-
+        });
         this.renderInventory();
     }
 
+
+      setLifeFrame(frame) {
+    this.lifeFrame = Math.max(0, Math.min(this.lifeFrames - 1, frame));
+    this.lifeSprite.frame = this.lifeFrame;
+  }
+
 renderInventory(){
-this.children.forEach(child => child.destroy())
+ this.itemSprites.forEach(s => s.destroy());
+    this.itemSprites = [];
 
 this.items.forEach((item, index)=> {
   const sprite =new Sprite({
-        resource : item.image,
-        position: new Vector2 (index *13 ,0 )
-        })
+        resource : item.images,
+        frameSize: new Vector2(64, 19),
+         hFrames: 1,
+         vFrames: 9,
+         frame: 0,
+        position: new Vector2 (70+index *20 ,2 ),
+        });
+        this.itemSprites.push(sprite);
         this.addChild(sprite);
  })
     }

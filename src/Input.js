@@ -41,6 +41,13 @@ export class Input {
            if (e.code === "Digit0" || e.code === "Numpad0") {
              this.zeroAction();
            }
+           if (e.code === "Equal" || e.code === "NumpadAdd") {
+            events.emit("CHANGE_LIFE", { amount: 1 });
+            }
+           if (e.code === "Minus" || e.code === "NumpadSubtract") {
+            events.emit("CHANGE_LIFE", { amount: -1 });
+             }
+
         });
 
         document.addEventListener("keyup", (e) => {
